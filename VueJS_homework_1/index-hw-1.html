@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 1</title>
+</head>
+
+<body>
+    <div id="app" class="demo">
+        <!-- Task 1 -->
+        <button @click="reverseMessage">{{ message }}</button>
+        <hr>
+
+        <!-- Task 2 -->
+        <button @click="clickBtn">Показать пароль</button>
+        <input :type="isFlag ? 'password' : 'text'">
+        <!-- <input v-else="!isFlag" type="text"> -->
+    </div>
+    <script src=" https://unpkg.com/vue@next"></script>
+
+        <script>
+            const HelloVueApp = {
+                data() {
+                    return {
+                        message: "Перевернуть",
+                        isFlag: true,
+                        inputType: '',
+                    };
+                },
+                methods: {
+                    reverseMessage: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    },
+                    clickBtn() {
+                        this.isFlag = !this.isFlag
+                        console.log(this.isFlag)
+                    }
+                },
+            };
+            Vue.createApp(HelloVueApp).mount("#app");
+
+        </script>
+
+        <!-- Фреймворк Vue.js
+Урок 2. Семинар: Введение в Vue.js
+Задачи по vue
+
+1. Создать кнопку "Перевернуть". При клике на кнопку текст кнопки, должен перевернуться и отобразиться в обратном порядке.
+
+2. Есть кнопка "Показать пароль" и поле для ввода пароля. При нажатии на кнопку, пароль должен либо отобразиться, либо скрыться. Задача на использование v-if -->
+
+</body>
+
+</html>
