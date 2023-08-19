@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seminar 1</title>
+</head>
+
+<style>
+    @keyframes vision {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .animation {
+        animation: vision 1s ease-in-out;
+    }
+</style>
+
+<body>
+    <div id="app" class="demo">
+        {{ message }}
+        <hr>
+
+        <!-- Task 1 -->
+        <p>Товаров в корзине {{ count }}</p>
+        <button @click="addCount">{{ btnText }}</button>
+        <button @click="decCount">Удалить товар</button>
+        <hr>
+
+        <!-- Task 2 -->
+        <button @click="canBuy=!canBuy">Мне исполнилось 14 лет</button>
+        <p v-show="canBuy">Можете заказать товар</p>
+
+        <button @click="cantBuy=!cantBuy">Мне еще нет 14 лет</button>
+        <p v-if="cantBuy">Доступ закрыт</p>
+        <hr>
+
+        <!-- Task 3 -->
+        <button @click="isShow=!isShow">Показать еще</button>
+        <p class="animation" v-show="isShow">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ducimus,
+            explicabo ratione odit minus quo molestias nisi itaque ad repellat.</p>
+        <hr>
+
+        <!-- Task 4 -->
+        <button @click="random">Генерировать случайное число</button>
+        <p v-if="number < 5">Число меньше 5</p>
+        <p v-else-if="number>=5 && number<=9">Число от 5 до 9</p>
+        <p v-else>Число равно 10</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+        const HelloVueApp = {
+            data() {
+                return {
+                    message: "Hello Vue!!",
+                    count: 0,
+                    btnText: "Купить",
+                    canBuy: false,
+                    cantBuy: false,
+                    isShow: false,
+                    number: null,
+                };
+            },
+            methods: {
+                addCount() {
+                    if (this.count < 1) {
+                        this.count++;
+                        this.btnText = "Товар в корзине";
+                    }
+                },
+                decCount() {
+                    if (this.count !== 0) {
+                        this.count--;
+                        this.btnText = "Купить";
+                    }
+                },
+                random() {
+                    this.number = Math.floor(Math.random() * 10 + 1);
+                }
+            },
+        };
+
+        Vue.createApp(HelloVueApp).mount("#app");
+    </script>
+
+    <!-- Task 1 -->
+    <!-- 1. Создать параграф, внутри которого будет отображаться текст “Товаров в корзине 0”
+2. Создать кнопку “Купить”, при клике на которую, значение внутри параграфа будет увеличиваться на 1, при повторном нажатии на эту кнопку, счетчик не становится больше
+3. При нажатии на кнопку купить, необходимо чтобы текст внутри кнопки поменялся на “Товар в Корзине” -->
+
+    <!-- Task 2 -->
+    <!-- 1. Создать две кнопки “Мне исполнилось 14 лет” и “Мне еще нет 14 лет”
+2. Если пользователь нажимает на первую кнопку, то должен отобразиться текст. “Можете заказать товар”
+3. Если пользователь нажимает на вторую кнопку, отображается текст “Доступ закрыт” -->
+
+    <!-- Task 3 -->
+    <!-- 1. Создать кнопку “Показать еще” при клике на которую появляется контент под кнопкой, при повторном клике, контент необходимо скрыть
+2. Добавить анимацию появления текстового блока -->
+
+    <!-- Task 4 -->
+    <!-- 1. Создайте кнопку "Генерировать случайное число". При клике на кнопку должно отображаться случайное число в заданном диапазоне (например, от 1 до 10).
+2. При клике на кнопку, если полученное значение меньше 5, необходимо вывести на страницу, “Число меньше 5”
+3. Если число от 5 до 9, необходимо вывести “Число от 5 до 9” -->
+    <!-- 4. Если число равно 10, необходимо вывести “Число ранов 10” -->
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 1</title>
+</head>
+
+<body>
+    <h1>Урок 1. Лекция: Введение в Vue.js</h1>
+
+    <div id="app">
+        <h1>{{message}}</h1>
+        <!-- <h2>{{ sayHello() }}</h2> -->
+
+        <button v-on:click="changeText">click button</button>
+        <h2>Счетчик</h2>
+        <button v-on:click="increase(5, $event)">increase</button>
+        <p>{{ counter }}</p>
+
+        <h2 v-on:mousemove="mouseMove($event)">Mouse move {{ x }} - {{ y }}
+            <span v-on:mousemove.stop.prevent>stop text</span>
+        </h2>
+        <p v-html="bigText"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello Vue',
+                counter: 0,
+                x: 0,
+                y: 0,
+                bigText: `big text <b> new text <a href=#>info</a></b>`,
+            },
+            methods: {
+                // sayHello() 
+                //     this.message = 'new message';
+                //     return this.message;
+                // ,
+                mouseMove(event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                },
+                changeText() {
+                    this.message = 'Text click';
+                },
+                increase(step) {
+                    this.counter += step;
+                    console.log(event);
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>
