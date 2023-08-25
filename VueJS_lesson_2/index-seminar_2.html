@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seminar 2</title>
+</head>
+<style>
+    .demo {
+        font-family: sans-serif;
+        border: 1px solid #eee;
+        border-radius: 2px;
+        padding: 20px 30px;
+        margin-top: 1em;
+        margin-bottom: 40px;
+        user-select: none;
+        overflow-x: auto;
+    }
+
+    .products {
+        border: 1px solid #000;
+        padding: 5px;
+        max-width: 250px;
+    }
+
+    li {
+        list-style-type: none;
+    }
+</style>
+
+<body>
+    <div id="app" class="demo">
+        <!-- task 1 -->
+        <div class="products">
+            <h2>{{ product.name}}</h2>
+            <img :src="product.url" :alt="product.name" width="200">
+            <p>price: {{product.price}}</p>
+            <button :disabled="isDisabled" @click="discount(product.price)">sale</button>
+        </div>
+        <hr>
+        <!-- tasak 2 -->
+        <div class="users">
+            <ul v-for="item in users" :key="item.id">
+                <li>{{item.id}} {{item.name}} {{item.age}}</li>
+            </ul>
+        </div>
+        <hr>
+        <!-- tasak 3 -->
+        <div class="list__product">
+            <ul>
+                <li v-for="good in goods" :key="good.id">
+                    <input type="text" v-model.number="good.amount">
+                    <label>
+                        <input type="checkbox">{{good.title}}
+                    </label>
+                </li>
+            </ul>
+
+        </div>
+        <hr>
+        <!-- Task 4 -->
+        <form @submit.prevent="createUser">
+            <label for="">name
+                <input type="text" v-model="name">
+            </label>
+            <label for="">surname
+                <input type="text" v-model="surname">
+            </label>
+            <label for="">email
+                <input type="email" v-model="email">
+            </label>
+            <button>add user</button>
+        </form>
+        <ul>
+            <li v-for="user in contact" :key="user.id">
+                {{user.id}} {{user.name}} {{user.surname}} {{user.email}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- Код для подключения и работы Vue
+    https://codepen.io/team/Vue/pen/KKpRVpx -->
+    <script>
+        const HelloVueApp = {
+            data() {
+                return {
+                    product: {
+                        name: 'Product 1',
+                        price: 100,
+                        url: 'https://permfermer.ru/storage/media/SpsJrjnTlRl6aXCAmM3OcjipGVIMx92ofbN5NVfg-thumb.jpg'
+                    },
+                    isDisabled: false,
+                    users: [
+                        {
+                            id: 1,
+                            name: 'Leanne Graham',
+                            age: 25,
+                        },
+                        {
+                            id: 2,
+                            name: 'Ervin Howell',
+                            age: 33,
+                        },
+                        {
+                            id: 3,
+                            name: 'Clementine Bauch',
+                            age: 34,
+                        },
+                        {
+                            id: 4,
+                            name: 'Patricia Lebsack',
+                            age: 40,
+                        },
+                        {
+                            id: 5,
+                            name: 'Chelsey Dietrich',
+                            age: 18,
+                        },
+                    ],
+                    goods: [
+                        { id: 1, title: 'Хлеб', amount: 1 },
+                        { id: 2, title: 'Молоко', amount: 20 },
+                        { id: 3, title: 'Соль', amount: 12 },
+                        { id: 4, title: 'Сахар', amount: 53 },
+                    ],
+                    name: '',
+                    surname: '',
+                    email: '',
+                    contact: [],
+                };
+            },
+            methods: {
+                discount() {
+                    const discountPersent = Math.floor(Math.random() * 20) + 1;
+                    this.product.price = this.product.price - (this.product.price * discountPersent / 100);
+                    this.isDisabled = !this.isDisabled;
+                },
+                createUser() {
+                    const nameTrim = this.name.trim();
+                    const surnameTrim = this.surname.trim();
+                    const emailTrim = this.email.trim();
+                    if (nameTrim && surnameTrim && emailTrim) {
+                        const newUser = {
+                            id: this.contact.length + 1,
+                            name: nameTrim,
+                            surname: surnameTrim,
+                            email: emailTrim,
+                        };
+                        this.contact.push(newUser);
+                        this.name = '';
+                        this.surname = '';
+                        this.email = '';
+                    }
+                }
+
+            },
+        };
+
+        Vue.createApp(HelloVueApp).mount("#app");
+    </script>
+</body>
+
+</html>
+<!-- Task 1
+    Вы разрабатываете страницу для отображения информации о товаре. У вас есть объект product, который содержит информацию о товаре, включая название, цену и URL изображения товара. Вам необходимо отобразить эту информацию на странице с использованием v-bind.
+Добавьте кнопку, которая будет изменять цену товара. При нажатии на кнопку должна генерироваться скидка на товар от 1 до 20% и обновиться цена товара в соответствии с значением скидки -->
+<!-- Task 2
+    Вы разрабатываете простое приложение для отображения списка пользователей. У вас есть массив объектов users, где каждый объект представляет одного пользователя с его именем и возрастом. Вам необходимо отобразить каждого пользователя из массива в виде списка на странице. -->
+<!-- Task 3
+        Вы разрабатываете приложение для создания списка покупок. У вас есть массив объектов items, где каждый объект представляет товар с его названием и количеством. Вам необходимо отобразить список товаров, предоставить возможность изменять количество каждого товара и отмечать товары, которые уже куплены. -->
+<!-- Task4
+     Вы разрабатываете приложение для управления списком контактов. У вас есть форма с полями "Имя", "Фамилия" и "Email", где пользователь может вводить информацию о новом контакте. После добавления контакта он должен отображаться в списке контактов. Требуется связать форму с данными и отображать список контактов на странице. -->

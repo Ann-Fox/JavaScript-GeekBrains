@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>list</h2>
+        <ul>
+            <li v-for="item in listItems" :key="item.id">{{ item }}</li>
+        </ul>
+        <input type="text" v-model="newList" @keyup.enter="addItem">
+
+        <hr>
+        <article v-for="item in product" :key="item.id" class="article">
+            <h2 class="article__title">{{item.title}}</h2>
+            <p class="article__price">{{item.price}}</p>
+            <button class="btn" @click="likeToggle = !likeToggle" :class="{like: likeToggle}">Buy</button>
+        </article>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                product: [
+                    {
+                        title: "Product 1",
+                        price: 100,
+                    },
+                    {
+                        title: "Product 2",
+                        price: 200,
+                    },
+                ],
+                likeToggle: false,
+                listItems: [1, 2, 4],
+                newList: '',
+            },
+            methods: {
+                addItem() {
+                    this.listItems.push(this.newList);
+                }
+
+            },
+        })
+    </script>
+
+    <style>
+        .btn {
+            width: 35px;
+            height: 35px;
+            background-color: aqua;
+        }
+
+        .like {
+            color: red;
+        }
+    </style>
+</body>
+
+</html>

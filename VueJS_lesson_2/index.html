@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- @keyup.enter="send()" @keyup.space="send() передача данных при нажатии на Enter или пробел -->
+        <input type="text" @keyup.enter="send()" @keyup.space="send()">
+        <button @click="send()">Оправить</button>
+
+        <hr>
+
+        <h2>link elem</h2>
+        <!-- href="#" => v-bind:href="linkHref" => :href="linkHref"-->
+        <a :href="linkHref">my new link</a>
+        <img :src="imgPhoto" alt="photo">
+
+        <hr>
+        <h2>Constructor</h2>
+        <input type="text" v-model="blockWidth">
+        <input type="text" v-model="blockColor">
+
+        <hr>
+        <!-- Не сработал объект  styleBlock-->
+        <div class="block" :style="change">
+            Lorem ipsum, dolor sit amet consectetur adipisicing.
+        </div>
+
+        <hr>
+        <!-- v-modal -->
+        <h2>{{modelData}}</h2>
+        <input type="text" v-model.lazy="modelData">
+        <button @click="headingText" class="heading__btn">click heading</button>
+
+        <hr>
+        <h2>Calculator</h2>
+        <input type="text" v-model.numder="firstNum">
+        <input type="text" v-model.number="secondNum">
+        = {{result}}
+        <div>
+            <button @clicl="plus">+</button>
+            <button @clicl="minus">-</button>
+            <button @clicl="mult">*</button>
+            <button @clicl="div">/</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                blockWidth: 100,
+                blockColor: '#ccc',
+                firstNum: 0,
+                secondNum: 0,
+                result: 0,
+                modelData: '',
+                linkHref: 'product.html',
+                imgPhoto: 'photo.jpg',
+                // styleBlock: {
+                //     backroundColor: 'green',
+                //     color: 'red',
+                // }
+            },
+            methods: {
+                plus() {
+                    this.result = this.firstNum + this.secondNum;
+                },
+                minus() {
+                    this.result = this.firstNum - this.secondNum;
+                },
+                mult() {
+                    this.result = this.firstNum * this.secondNum;
+                },
+                div() {
+                    this.result = this.firstNum / this.secondNum;
+                },
+                headingText() {
+                    if (this.modelData === '') {
+                        this.modelData = "Heading for block"
+                    }
+                },
+                send() {
+                    console.log('Отправили данные внутри input');
+                }
+            },
+            computed: {
+                change() {
+                    return {
+                        width: `${this.blockWidth}px`,
+                        height: `${this.blockWidth}px`,
+                        backgroundColor: this.blockColor,
+                    }
+                },
+            },
+        })
+    </script>
+
+    <style>
+        img {
+            max-width: 300px;
+        }
+
+        .block {
+            width: 200px;
+            height: 150px;
+            /* background-color: rgb(177, 247, 220);
+        color: #fa1ac9; */
+        }
+    </style>
+
+</body>
+
+</html>
