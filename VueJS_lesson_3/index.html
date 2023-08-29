@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 3</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <new-component title="Hello new title"></new-component>
+        <new-component title="Hello second tatle"></new-component>
+        <standart-comp></standart-comp>
+        <new-component :title="article" v-for="article in articles" :key="article.id"></new-component>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <script src="comp.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                articles: ['info article', 'info article2', 'info article3']
+                // message: 'text massege'
+            },
+            // methods: {
+            //     newInfo() {
+            //         console.log('hello world');
+            //     }
+            // },
+            // computed: {
+            //     newComp() {
+            //         return this.message;
+            //     }
+            // },
+
+        })
+    </script>
+
+    <style>
+
+    </style>
+
+</body>
+
+</html>
