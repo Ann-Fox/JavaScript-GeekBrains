@@ -6,6 +6,10 @@
 </template>
 
 <script>
+import princess1 from '@/assets/img/1.jpg'
+import princess2 from '@/assets/img/2.jpg'
+import princess3 from '@/assets/img/3.jpg'
+import princess4 from '@/assets/img/4.jpg'
     export default {
         name: "GalleryComponent",
       
@@ -13,11 +17,11 @@
             return {
                 selectImg: '',
                 princesses: {
-                    princess1: "@/assets/img/1.jpg",
-                    princess2: "./../assets/img/2.jpg",
-                    princess3: "./../assets/img/3.jpg",
-                    princess4: './../assets/img/4.jpg',
-                }
+                    princess1,
+                    princess2,
+                    princess3,
+                    princess4
+                                   }
             }
         },
         methods: {
@@ -36,12 +40,10 @@ div {
 
 img {
     width: 150px;
-    height: 100%;
 }
 
 .big {
     width: 300px;
-    height: 100%;
 }
 </style>
 
