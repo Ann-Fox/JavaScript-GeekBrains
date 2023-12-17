@@ -125,3 +125,53 @@ saveUserData(user);
 //         });
 // }
 // saveUserData(user);
+
+// Анна, здравствуйте :)
+// // 1. По заданию, "Функция должна возвращать промис", сейчас же из функции ничего не возвращается.
+// Если вернется ответ не с кодом 200, то мы в console.log ничего не получим.
+// Получать нужно было не список пользователей, а одного с id, который передаем, url должен быть чуть другой.
+// Должно быть примерно так:
+
+// function getUserData(id) {
+//   return fetch(`https://reqres.in/api/users/${id}`) 
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error(`wrong response status: ${response.status}`);
+//       }
+//       return response.json();
+//     })
+//     .then(json => json.data);
+// }
+
+// getUserData(3)
+//   .then(result => console.log(result))
+//   .catch(err => console.log(`Ошибка: ${err.message}`));
+// То есть возвращается промис, либо с результатом, либо с сообщением ошибки. Ошибку тоже стоило обрабатывать нормально, так как может быть и не только ошибка что нет такого пользователя, может просто сервер отвалился.
+// 2. Здесь тоже нет проверки на статус ответа, только если ok (двухсотые), то обрабатываем.
+// Вроде такого должно быть:
+
+// function saveUserData(userObject) {
+//   return fetch(`https://reqres.in/api/users`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json;charset=utf-8",
+//     },
+//     body: JSON.stringify(userObject),
+//   }).then(resp => {
+//     if (!resp.ok) {
+//       throw new Error(`Wrong status ${resp.status}`);
+//     }
+//   });
+// }
+
+// const user = {
+//   name: "John Doe",
+//   job: "unknown",
+// };
+
+// saveUserData(user)
+//   .then(() => console.log("User data saved successfully"))
+//   .catch(error => console.log(error.message));
+// В готовом в первом, там url просто другой должен быть, не нужно фильтровать.
+// Ну и везде мы должны возвращать промис :)
+// Ок, это сложновато все, так что переживать тут не нужно. В любом случае, отличная работа, спасибо и вам, надеюсь, еще пересечемся где-нибудь, Анна :)

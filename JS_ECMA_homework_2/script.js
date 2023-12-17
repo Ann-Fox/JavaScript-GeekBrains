@@ -37,9 +37,9 @@ class Student {
         this.age = age;
         this.grade = grade;
     }
-    displayInfo(){
-console.log(`Name: ${this.name}, Age: ${this.age}, Grade: ${this.grade}`);
-        }
+    displayInfo() {
+        console.log(`Name: ${this.name}, Age: ${this.age}, Grade: ${this.grade}`);
+    }
 }
 // Пример использования класса
 const student = new Student("John Smith", 16, "10th grade");
